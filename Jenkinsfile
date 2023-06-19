@@ -4,10 +4,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Git Checkout') {
             steps {
                 gitCheckout(branch: "main", url: "https://github.com/yogeshcd/project1-java-app-demo.git")
                 // git branch: 'main', url: 'https://github.com/yogeshcd/project1-java-app-demo.git'
+            }
+        }
+        stage('Unit Test maven') {
+            steps {
+                mvnTest()
             }
         }
     }
