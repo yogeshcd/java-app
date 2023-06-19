@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                
-                git branch: 'main', url: 'https://github.com/yogeshcd/project1-java-app-demo.git'
+                gitCheckout(branch: "main", url: "https://github.com/yogeshcd/project1-java-app-demo.git")
+                // git branch: 'main', url: 'https://github.com/yogeshcd/project1-java-app-demo.git'
             }
         }
     }
