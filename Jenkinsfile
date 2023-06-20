@@ -24,7 +24,7 @@ pipeline {
             steps {
                 
                 script {
-                    sonarCodeAnalysis(credentialsId: 'sonar-api-cred')
+                    sonarCodeAnalysis('sonar-api-cred')
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
         stage('Sonar Quality gate: SonarQube') {
             steps {
                 script {
-                sonarQualityGate(credentialsId: 'sonar-api-cred')
+                sonarQualityGate('sonar-api-cred')
                 }
             }
         }
