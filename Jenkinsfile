@@ -2,7 +2,11 @@
 
 pipeline {
     agent any
-
+    parameters {
+        string(name:'aws_region', description: "Name of AWS region", defaultValue: "us-east-1")
+        string(name:'private_repo_name', description: "private_repo_name", defaultValue: "val")
+        string(name:'project_name', description: "project_name", defaultValue: "java-app")
+    }
     stages {
         stage('Git Checkout') {
             steps {
@@ -41,6 +45,13 @@ pipeline {
             steps {
                 script {
                 mvnBuild()
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                dockerBuild(private_repo_name: private_repo_name, project_name: project_name,region: region )
                 }
             }
         }
