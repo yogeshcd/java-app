@@ -51,7 +51,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                dockerBuild(private_repo_name: private_repo_name, project_name: project_name,region: region )
+                dockerBuild(private_repo_name: ${params.private_repo_name}, project_name: ${params.project_name},region: ${params.region} )
                 }
             }
         }
