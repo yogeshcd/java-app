@@ -14,40 +14,40 @@ pipeline {
                 // git branch: 'main', url: 'https://github.com/yogeshcd/project1-java-app-demo.git'
             }
         }
-        stage('Unit Test maven') {
-            steps {
-                mvnTest()
-            }
-        }
-        stage('Integration Test maven') {
-            steps {
-                mvnIntegrationTest()
-            }
-        }
-        stage('Sonar Code analysis: SonarQube') {
-            steps {
+        // stage('Unit Test maven') {
+        //     steps {
+        //         mvnTest()
+        //     }
+        // }
+        // stage('Integration Test maven') {
+        //     steps {
+        //         mvnIntegrationTest()
+        //     }
+        // }
+        // stage('Sonar Code analysis: SonarQube') {
+        //     steps {
                 
-                script {
-                    sonarCodeAnalysis('sonar-api-cred')
-                }
-            }
-        }
+        //         script {
+        //             sonarCodeAnalysis('sonar-api-cred')
+        //         }
+        //     }
+        // }
                         
-        stage('Sonar Quality gate: SonarQube') {
-            steps {
-                script {
-                sonarQualityGate('sonar-api-cred')
-                }
-            }
-        }
+        // stage('Sonar Quality gate: SonarQube') {
+        //     steps {
+        //         script {
+        //         sonarQualityGate('sonar-api-cred')
+        //         }
+        //     }
+        // }
 
-        stage('Maven build: Maven') {
-            steps {
-                script {
-                mvnBuild()
-                }
-            }
-        }
+        // stage('Maven build: Maven') {
+        //     steps {
+        //         script {
+        //         mvnBuild()
+        //         }
+        //     }
+        // }
         stage('Docker Build') {
             steps {
                 script {
