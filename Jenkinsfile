@@ -55,5 +55,12 @@ pipeline {
                 }
             }
         }
+        stage('Docker push') {
+            steps {
+                script {
+                dockerPushECR(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.region )
+                }
+            }
+        }
     }
 }
