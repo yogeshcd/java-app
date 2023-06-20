@@ -20,5 +20,21 @@ pipeline {
                 mvnIntegrationTest()
             }
         }
+        stage('Sonar Code analysis: SonarQube') {
+            steps {
+                
+                script {
+                    sonarCodeAnalysis(credentialsId: 'sonar-api-cred')
+                }
+            }
+        }
+                        
+        stage('Sonar Quality gate: SonarQube') {
+            steps {
+                script {
+                sonarQualityGate(credentialsId: 'sonar-api-cred')
+                }
+            }
+        }
     }
 }
