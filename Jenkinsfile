@@ -55,6 +55,13 @@ pipeline {
                 }
             }
         }
+        stage('Docker Scan: Trivy ') {
+            steps {
+                script {
+                dockerImageScan(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.aws_region )
+                }
+            }
+        }
         stage('Docker Push') {
             steps {
                 script {
