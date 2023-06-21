@@ -48,17 +48,17 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Docker Build') {
-            steps {
-                script {
-                dockerBuild(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.region )
-                }
-            }
-        }
+        // stage('Docker Build') {
+        //     steps {
+        //         script {
+        //         dockerBuild(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.region )
+        //         }
+        //     }
+        // }
         stage('Docker push') {
             steps {
                 script {
-                dockerPushECR(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.region )
+                dockerPushECR(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.aws_region )
                 }
             }
         }
