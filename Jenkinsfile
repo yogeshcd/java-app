@@ -1,5 +1,8 @@
 @Library('jenkins-shared-lib') _
 
+
+
+//with --- use it if watn to create / 
 pipeline {
     agent any
     parameters {
@@ -73,6 +76,15 @@ pipeline {
             steps {
                 script {
                 dockerCleanUP(private_repo_name: params.private_repo_name, project_name: params.project_name, region: params.aws_region )
+                }
+            }
+        }
+        stage("Terraform") {
+            steps {
+                script{
+                    dir('terraform-eks') {
+                        terraformApply()
+                    }
                 }
             }
         }
