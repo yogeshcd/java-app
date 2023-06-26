@@ -94,9 +94,9 @@ pipeline {
                         pwd
                         ls -l
                         """
-                        def access_key = "key"
-                        def secret_key = "key"
-                        terraformApply()
+                        def access_key = ${AWS_ACCESS_KEY}
+                        def secret_key = ${AWS_SECRECT_ACCESS_KEY}
+                        terraformApply(access_key:access_key, secret_key:secret_key)
                     }
                 }
             }
