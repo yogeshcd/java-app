@@ -1,3 +1,11 @@
+variable "AWS_ACCESS_KEY" {
+  description = ""
+}
+
+variable "AWS_SECRET_ACCESS_KEY" {
+  description = ""
+}
+
 variable "aws_eks_cluster_name" {
   description = "Name of eks cluster"
 }
