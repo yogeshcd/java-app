@@ -11,7 +11,7 @@ pipeline {
         string(name:'project_name', description: "project_name", defaultValue: "java-app")
     }
 
-    enviornment {
+    environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRECT_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 
