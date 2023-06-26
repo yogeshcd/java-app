@@ -94,7 +94,7 @@ pipeline {
                         pwd
                         ls -l
                         """
-                        terraformApply()
+                        terraformApply(access_key=$AWS_ACCESS_KEY, secret_key=$AWS_SECRECT_ACCESS_KEY)
                     }
                 }
             }
