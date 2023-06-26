@@ -96,7 +96,7 @@ pipeline {
                         """
                         def access_key = "key"
                         def secret_key = "key"
-                        terraformApply(access_key=access_key, secret_key=secret_key)
+                        terraformApply()
                     }
                 }
             }
