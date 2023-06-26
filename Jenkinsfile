@@ -10,6 +10,13 @@ pipeline {
         string(name:'private_repo_name', description: "private_repo_name", defaultValue: "val")
         string(name:'project_name', description: "project_name", defaultValue: "java-app")
     }
+
+    enviornment {
+        AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
+        AWS_SECRECT_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+
+    }
+
     stages {
         stage('Git Checkout') {
             steps {
