@@ -83,6 +83,10 @@ pipeline {
             steps {
                 script{
                     dir('terraform-eks') {
+                        sh """
+                        pwd
+                        ls -l
+                        """
                         terraformApply()
                     }
                 }
