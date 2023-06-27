@@ -5,6 +5,12 @@ terraform {
       version = "~> 4.0"
     }
   }
+    backend "s3" {
+    bucket = "somerandommybucket"
+    key    = "fullinfra"
+    region = "us-east-1"
+  }
+
 }
 
 # Configure the AWS Provider
