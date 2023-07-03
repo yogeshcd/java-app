@@ -9,6 +9,8 @@ pipeline {
         string(name:'aws_region', description: "Name of AWS region", defaultValue: "us-east-1")
         string(name:'private_repo_name', description: "private_repo_name", defaultValue: "val")
         string(name:'project_name', description: "project_name", defaultValue: "java-app")
+        string(name:'helm_chart_name', description: "helm_chart_name", defaultValue: "helm-java-app")
+        string(name:'release_name', description: "release_name", defaultValue: "java-app")
     }
 
     environment {
@@ -98,6 +100,27 @@ pipeline {
                         // def secret_key = $AWS_SECRECT_ACCESS_KEY
                         terraformApply()
                     }
+                }
+            }
+        }
+        stage("Connect to k8s") {
+            steps {
+                script{
+                    connectK8SCluster()
+                }
+            }
+        }
+        stage("Helm push") {
+            steps {
+                script{
+                    helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region, )
+                }
+            }
+        }
+        stage("Helm deploy") {
+            steps {
+                script{
+                    helmDeploy(helm_chart_name: params.helm_chart_name, region: params.aws_region, release_name: params.release_name)
                 }
             }
         }

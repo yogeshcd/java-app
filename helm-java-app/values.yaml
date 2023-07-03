@@ -1,0 +1,9 @@
+deployment:
+    name = "javaapp-deployment"
+    image = "aws_account_id.dkr.ecr.aws_region.amazonaws.com/aws_private_repo_name:latest"
+    containerPort = 8080
+    replicas = 1
+service:
+    name = "javaapp-service"
+    port = 80
+    type = LoadBalancer

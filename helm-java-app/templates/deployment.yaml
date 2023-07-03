@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.deployment.name}}
+spec:
+  replicas: {{.Values.deployment.replicas}}
+  selector:
+    matchLabels:
+      app: javaapp
+  template:
+    metadata:
+      labels:
+        app: javaapp
+    spec:
+      containers:
+      - name: javaapp
+        image: {{.Values.deployment.image}}
+        ports:
+        - containerPort: {{.Values.deployment.containerPort}}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.service.name}}
+spec:
+  selector:
+    app: javaapp
+  ports:
+  - name: http
+    port: {{.Values.service.port}}
+    targetPort: {{.Values.deployment.containerPort}}
+  type: {{.Values.service.LoadBalancer}}

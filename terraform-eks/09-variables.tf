@@ -34,7 +34,7 @@ variable "aws_subnet_public_availability_zones" {
 variable "aws_subnet_private_cidr_blocks" {
   type        = list(string)
   description = "CIDR ranges for private subnet"
-  default     = ["10.0.64.0/19", "10.0.96.0/24"]
+  default     = ["10.0.64.0/19", "10.0.96.0/19"]
 }
 
 variable "aws_subnet_private_availability_zones" {
