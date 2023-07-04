@@ -19,6 +19,7 @@ pipeline {
         // HELM_CHART_VERSION = "${sh(helm inspect chart helm-java-app  | grep version | awk '{print $2}')}"
         HELM_CHART_VERSION = "${sh(returnStdout: true, script: "helm inspect chart helm-java-app  | grep version: | awk '{print \$2}'").trim()}"
         FILE=".tgz"
+        NAME="$HELM_CHART_VERSION$FILE"
         // HELM_CHART_VERSION=$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')
     }
 
