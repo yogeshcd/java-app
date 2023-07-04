@@ -136,11 +136,8 @@ pipeline {
                 script{
                     // helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region)
                     sh "echo helm push"
-                    sh '''
-                    echo $TAG
-                    
-                    '''
-                    helmChartPush(helm_chart_name: params.helm_chart_name,region: params.aws_region )
+
+                    helmChartPush(helm_chart_name: params.helm_chart_name,region: params.aws_region, private_repo_name: params.private_repo_name )
                 }
             }
         }
