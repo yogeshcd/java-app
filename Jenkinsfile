@@ -16,6 +16,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRECT_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        HELM_CHART_VERSION = "$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')"
 
     }
 
@@ -116,10 +117,10 @@ pipeline {
                 script{
                     // helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region)
                     sh "echo helm push"
-                    sh """
-                    HELM_CHART_VERSION = "$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')"
+                    // sh """
+                    // HELM_CHART_VERSION = "$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')"
                     
-                    """
+                    // """
                     helmChartPush(package_name: "helm-java-app",region: params.aws_region )
                 }
             }
