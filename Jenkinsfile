@@ -16,10 +16,27 @@ pipeline {
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRECT_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        HELM_CHART_VERSION = "${sh(helm inspect chart helm-java-app  | grep version | awk '{print $2}')}"
-
+        // HELM_CHART_VERSION = "${sh(helm inspect chart helm-java-app  | grep version | awk '{print $2}')}"
+        TAG = "${sh(returnStdout: true, script: 'helm inspect chart helm-java-app  | grep version: | awk '{print $2}'').trim()}"
+        // HELM_CHART_VERSION=$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')
     }
 
+// environment {
+//         GO114MODULE = 'on'
+//         CGO_ENABLED = 0
+//         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+//         GCP_SECRET_FILE = credentials('gcp-account-json')
+        // TAG = "${sh(returnStdout: true, script: 'git rev-parse --short=7 HEAD').trim()}"
+//     }
+
+// sh '''
+//                             VERSION=$(curl -s "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq -r '.tag_name')
+//                             OS=Linux
+//                             ARCH=x86_64
+//                             curl -sL "https://github.com/google/go-containerregistry/releases/download/${VERSION}/go-containerregistry_${OS}_${ARCH}.tar.gz" > go-containerregistry.tar.gz
+//                             tar -zxvf go-containerregistry.tar.gz -C /usr/local/bin/ crane
+//                             crane version
+//                           '''
     stages {
         stage('Git Checkout') {
             steps {
@@ -117,10 +134,10 @@ pipeline {
                 script{
                     // helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region)
                     sh "echo helm push"
-                    // sh """
-                    // HELM_CHART_VERSION = "$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')"
+                    sh '''
+                    echo $TAG
                     
-                    // """
+                    '''
                     helmChartPush(package_name: "helm-java-app",region: params.aws_region )
                 }
             }
