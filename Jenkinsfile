@@ -116,6 +116,7 @@ pipeline {
                 script{
                     // helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region)
                     sh "echo helm push"
+                    sh "HELM_CHART_VERSION = $(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')"
                     helmChartPush(package_name: "helm-java-app",region: params.aws_region )
                 }
             }
