@@ -88,25 +88,26 @@ pipeline {
         //         }
         //     }
         // }
-        stage("Terraform") {
-            steps {
-                script{
-                    dir('terraform-eks') {
-                        sh """
-                        pwd
-                        ls -l
-                        """
-                        // def access_key = $AWS_ACCESS_KEY
-                        // def secret_key = $AWS_SECRECT_ACCESS_KEY
-                        terraformApply()
-                    }
-                }
-            }
-        }
+        // stage("Terraform") {
+        //     steps {
+        //         script{
+        //             dir('terraform-eks') {
+        //                 sh """
+        //                 pwd
+        //                 ls -l
+        //                 """
+        //                 // def access_key = $AWS_ACCESS_KEY
+        //                 // def secret_key = $AWS_SECRECT_ACCESS_KEY
+        //                 terraformApply()
+        //             }
+        //         }
+        //     }
+        // }
         stage("Connect to k8s") {
             steps {
                 script{
-                    connectK8SCluster()
+                    def cluster_name = "demo"
+                    connectK8SCluster(region: params.aws_region,cluster: cluster_name )
                 }
             }
         }
