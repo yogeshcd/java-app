@@ -138,7 +138,7 @@ pipeline {
                     echo $TAG
                     
                     '''
-                    helmChartPush(package_name: "helm-java-app",region: params.aws_region )
+                    helmChartPush(helm_chart_name: params.helm_chart_name,region: params.aws_region )
                 }
             }
         }
