@@ -17,7 +17,7 @@ pipeline {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRECT_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         // HELM_CHART_VERSION = "${sh(helm inspect chart helm-java-app  | grep version | awk '{print $2}')}"
-        TAG = "${sh(returnStdout: true, script: 'helm inspect chart helm-java-app  | grep version: | awk '{print $2}'').trim()}"
+        TAG = "${sh(returnStdout: true, script: "helm inspect chart helm-java-app  | grep version: | awk '{print $2}'").trim()}"
         // HELM_CHART_VERSION=$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')
     }
 
