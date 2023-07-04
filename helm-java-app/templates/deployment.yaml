@@ -30,4 +30,4 @@ spec:
   - name: http
     port: {{.Values.service.port}}
     targetPort: {{.Values.deployment.containerPort}}
-  type: {{.Values.service.LoadBalancer}}
+  type: {{.Values.service.type}}
