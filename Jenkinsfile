@@ -18,6 +18,7 @@ pipeline {
         AWS_SECRECT_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         // HELM_CHART_VERSION = "${sh(helm inspect chart helm-java-app  | grep version | awk '{print $2}')}"
         HELM_CHART_VERSION = "${sh(returnStdout: true, script: "helm inspect chart helm-java-app  | grep version: | awk '{print \$2}'").trim()}"
+        FILE=".tgz"
         // HELM_CHART_VERSION=$(helm inspect chart helm-java-app  | grep version: | awk '{print $2}')
     }
 
