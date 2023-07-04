@@ -116,6 +116,7 @@ pipeline {
                 script{
                     // helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region)
                     sh "echo helm push"
+                    helmChartPush(package_name: "helm-java-app")
                 }
             }
         }
