@@ -114,7 +114,8 @@ pipeline {
         stage("Helm push") {
             steps {
                 script{
-                    helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region)
+                    // helmPush(helm_chart_name: params.helm_chart_name, region: params.aws_region)
+                    sh "echo helm push"
                 }
             }
         }
