@@ -46,83 +46,83 @@ pipeline {
                 // git branch: 'main', url: 'https://github.com/yogeshcd/project1-java-app-demo.git'
             }
         }
-        // stage('Unit Test maven') {
-        //     steps {
-        //         mvnTest()
-        //     }
-        // }
-        // stage('Integration Test maven') {
-        //     steps {
-        //         mvnIntegrationTest()
-        //     }
-        // }
-        // stage('Sonar Code analysis: SonarQube') {
-        //     steps {
+        stage('Unit Test maven') {
+            steps {
+                mvnTest()
+            }
+        }
+        stage('Integration Test maven') {
+            steps {
+                mvnIntegrationTest()
+            }
+        }
+        stage('Sonar Code analysis: SonarQube') {
+            steps {
                 
-        //         script {
-        //             sonarCodeAnalysis('sonar-api-cred')
-        //         }
-        //     }
-        // }
+                script {
+                    sonarCodeAnalysis('sonar-api-cred')
+                }
+            }
+        }
                         
-        // stage('Sonar Quality gate: SonarQube') {
-        //     steps {
-        //         script {
-        //         sonarQualityGate('sonar-api-cred')
-        //         }
-        //     }
-        // }
+        stage('Sonar Quality gate: SonarQube') {
+            steps {
+                script {
+                sonarQualityGate('sonar-api-cred')
+                }
+            }
+        }
 
-        // stage('Maven build: Maven') {
-        //     steps {
-        //         script {
-        //         mvnBuild()
-        //         }
-        //     }
-        // }
-        // stage('Docker Build') {
-        //     steps {
-        //         script {
-        //         dockerBuild(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.aws_region )
-        //         }
-        //     }
-        // }
-        // stage('Docker Scan: Trivy ') {
-        //     steps {
-        //         script {
-        //         dockerImageScan(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.aws_region )
-        //         }
-        //     }
-        // }
-        // stage('Docker Push') {
-        //     steps {
-        //         script {
-        //         dockerPushECR(private_repo_name: params.private_repo_name, project_name: params.project_name, region: params.aws_region )
-        //         }
-        //     }
-        // }
-        // stage('Docker Clean up') {
-        //     steps {
-        //         script {
-        //         dockerCleanUP(private_repo_name: params.private_repo_name, project_name: params.project_name, region: params.aws_region )
-        //         }
-        //     }
-        // }
-        // stage("Terraform") {
-        //     steps {
-        //         script{
-        //             dir('terraform-eks') {
-        //                 sh """
-        //                 pwd
-        //                 ls -l
-        //                 """
-        //                 // def access_key = $AWS_ACCESS_KEY
-        //                 // def secret_key = $AWS_SECRECT_ACCESS_KEY
-        //                 terraformApply()
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Maven build: Maven') {
+            steps {
+                script {
+                mvnBuild()
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                dockerBuild(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.aws_region )
+                }
+            }
+        }
+        stage('Docker Scan: Trivy ') {
+            steps {
+                script {
+                dockerImageScan(private_repo_name: params.private_repo_name, project_name: params.project_name,region: params.aws_region )
+                }
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                script {
+                dockerPushECR(private_repo_name: params.private_repo_name, project_name: params.project_name, region: params.aws_region )
+                }
+            }
+        }
+        stage('Docker Clean up') {
+            steps {
+                script {
+                dockerCleanUP(private_repo_name: params.private_repo_name, project_name: params.project_name, region: params.aws_region )
+                }
+            }
+        }
+        stage("Terraform") {
+            steps {
+                script{
+                    dir('terraform-eks') {
+                        sh """
+                        pwd
+                        ls -l
+                        """
+                        // def access_key = $AWS_ACCESS_KEY
+                        // def secret_key = $AWS_SECRECT_ACCESS_KEY
+                        terraformApply()
+                    }
+                }
+            }
+        }
         stage("Connect to k8s") {
             steps {
                 script{
