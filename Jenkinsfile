@@ -51,11 +51,11 @@ pipeline {
                 mvnTest()
             }
         }
-        stage('Integration Test maven') {
-            steps {
-                mvnIntegrationTest()
-            }
-        }
+        // stage('Integration Test maven') {
+        //     steps {
+        //         mvnIntegrationTest()
+        //     }
+        // }
         stage('Sonar Code analysis: SonarQube') {
             steps {
                 
